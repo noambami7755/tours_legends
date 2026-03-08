@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "tours_legends",
-    "slug": "tours_legends",
+    "slug": "tours-and-legends-israels-trail",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "334ac539-3cdd-4dc3-a716-bb631b9dd79c"
+      }
+    },
+    "owner": "noambamis-organization"
   }
 }

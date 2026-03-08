@@ -8,6 +8,7 @@ import { usePosts } from '../hooks/usePosts';
 import { useAds } from '../hooks/useAds';
 import { PostCard } from '../components/PostCard';
 import { AdCarousel } from '../components/AdCarousel';
+import { Footer } from '../components/Footer';
 import { Theme } from '../config';
 
 export const FeedScreen = () => {
@@ -22,7 +23,7 @@ export const FeedScreen = () => {
     );
 
     const renderFooter = () => {
-        if (!loading) return <View className="h-20" />;
+        if (!loading) return <Footer />;
         return (
             <View className="py-4">
                 <ActivityIndicator size="large" color={Theme.colors.primary} />

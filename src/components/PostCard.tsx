@@ -14,17 +14,12 @@ export const PostCard: React.FC<PostCardProps> = ({ post, onPress }) => {
             activeOpacity={0.7}
             className="bg-white rounded-2xl shadow-sm border border-gray-100 mb-3 mx-4 flex-row-reverse"
         >
-            {post.image ? (
-                <Image
-                    source={{ uri: post.image }}
-                    className="w-28 aspect-square rounded-xl bg-gray-200"
-                    resizeMode="cover"
-                />
-            ) : (
-                <View className="w-28 aspect-square rounded-xl bg-gray-200 items-center justify-center">
-                    <Text className="text-gray-400 text-xs text-center">No Image</Text>
-                </View>
-            )}
+            <Image
+                source={post.image ? { uri: post.image } : require('../../assets/hikers_defualt.png')}
+                className="w-28 aspect-square rounded-xl bg-gray-200"
+                resizeMode="cover"
+            />
+
 
             {/* Text Container */}
             <View className="flex-1 justify-center mr-3">

@@ -8,6 +8,9 @@ import { FeedScreen } from '../screens/FeedScreen';
 import { PostScreen } from '../screens/PostScreen';
 import { Theme } from '../config';
 import { DrawerParamList, RootStackParamList } from '../types/navigation';
+import { TriviaIntroScreen } from '../screens/TriviaIntroScreen';
+import { TriviaGameScreen } from '../screens/TriviaGameScreen';
+import { TriviaSummaryScreen } from '../screens/TriviaSummaryScreen';
 
 const Stack = createStackNavigator<RootStackParamList>();
 const Drawer = createDrawerNavigator<DrawerParamList>();
@@ -16,6 +19,10 @@ const CustomHeaderTitle = () => (
     <View className="flex-1 items-center justify-center p-2">
         <Text className="font-bold text-xl tracking-wider" style={{ color: Theme.colors.primary }}>
             טיולים<Text className="text-gray-800"> & </Text>אגדות
+
+        </Text>
+        <Text className="font-bold text-xs tracking-wider">
+            {process.env.EXPO_PUBLIC_APP_SUBTITLE}
         </Text>
     </View>
 );
@@ -68,6 +75,21 @@ const MainStack = () => {
                     headerRight: () => <CustomHeaderRight />, // Keep hamburger logic
                 })}
             />
+            <Stack.Screen
+                name="TriviaIntro"
+                component={TriviaIntroScreen}
+                options={{ headerTitle: 'משחק טריוויה' }}
+            />
+            <Stack.Screen
+                name="TriviaGame"
+                component={TriviaGameScreen}
+                options={{ headerTitle: 'משחק טריוויה' }}
+            />
+            <Stack.Screen
+                name="TriviaSummary"
+                component={TriviaSummaryScreen}
+                options={{ headerTitle: 'סיכום משחק', headerLeft: () => null }}
+            />
         </Stack.Navigator>
     );
 };
@@ -84,18 +106,18 @@ const CustomDrawerContent = (props: DrawerContentComponentProps) => {
                 labelStyle={{ textAlign: 'right', fontSize: 16, fontWeight: '600', color: '#1f2937' }}
             />
             <DrawerItem
-                label="פייסבוק"
-                onPress={() => Linking.openURL('https://facebook.com')}
-                labelStyle={{ textAlign: 'right', fontSize: 16, fontWeight: '600', color: '#1f2937' }}
-            />
-            <DrawerItem
-                label="צור קשר"
-                onPress={() => Linking.openURL('mailto:contact@example.com')}
+                label="אתר"
+                onPress={() => Linking.openURL('https://meny.co.il')}
                 labelStyle={{ textAlign: 'right', fontSize: 16, fontWeight: '600', color: '#1f2937' }}
             />
             <DrawerItem
                 label="טריוויה"
-                onPress={() => alert('בקרוב!')}
+                onPress={() => props.navigation.navigate('Main', { screen: 'TriviaIntro' })}
+                labelStyle={{ textAlign: 'right', fontSize: 16, fontWeight: '900', color: Theme.colors.primary }}
+            />
+            <DrawerItem
+                label="פייסבוק"
+                onPress={() => Linking.openURL('https://www.facebook.com/groups/agadot')}
                 labelStyle={{ textAlign: 'right', fontSize: 16, fontWeight: '600', color: '#1f2937' }}
             />
         </DrawerContentScrollView>

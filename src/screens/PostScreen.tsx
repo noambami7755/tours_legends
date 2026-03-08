@@ -5,7 +5,9 @@ import RenderHtml from 'react-native-render-html';
 import { usePost } from '../hooks/usePost';
 import { useAds } from '../hooks/useAds';
 import { AdCarousel } from '../components/AdCarousel';
+import { Footer } from '../components/Footer';
 import { Theme } from '../config';
+import he from 'he';
 
 type PostScreenRouteProp = RouteProp<{ params: { postId: number; title: string } }, 'params'>;
 
@@ -15,7 +17,6 @@ export const PostScreen = () => {
     const { post, loading, error } = usePost(postId);
     const { ads } = useAds();
     const { width } = useWindowDimensions();
-
 
     if (loading) {
         return (
@@ -38,21 +39,17 @@ export const PostScreen = () => {
     return (
         <ScrollView className="flex-1 bg-gray-50" contentContainerStyle={{ paddingBottom: 40 }} showsVerticalScrollIndicator={false}>
             {/* Hero Image */}
-            {featuredImage ? (
-                <Image
-                    source={{ uri: featuredImage }}
-                    className="w-full h-72"
-                    resizeMode="cover"
-                />
-            ) : (
-                <View className="w-full h-72 bg-gray-300" />
-            )}
+            <Image
+                source={featuredImage ? { uri: featuredImage } : require('../../assets/hikers_defualt.png')}
+                className="w-full h-72 bg-gray-300"
+                resizeMode="contain"
+            />
 
             {/* Content Sheet */}
             <View className="bg-white -mt-6 rounded-t-3xl pt-6 flex-1 min-h-screen">
                 <View className="px-5">
                     <Text className="text-2xl font-extrabold text-gray-900 text-right mb-4 writing-direction-rtl">
-                        {post.title.rendered}
+                        {he.decode(post.title.rendered)}
                     </Text>
 
                     <RenderHtml
@@ -98,9 +95,10 @@ export const PostScreen = () => {
                     />
 
                 </View>
-                <View className="mt-8 mb-8 border-t border-gray-100 pt-6">
+                <View className="mt-8 border-t border-gray-100 pt-6">
                     <AdCarousel ads={ads} />
                 </View>
+                <Footer />
             </View>
         </ScrollView>
     );

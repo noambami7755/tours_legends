@@ -15,7 +15,7 @@ export const usePosts = () => {
       if (!isRefresh) setLoading(true);
       setError(null);
       const newPosts = await fetchPosts(pageNum);
-      if (newPosts.length < 10) {
+      if (newPosts.length < 20) {
         setHasMore(false);
       }
 

@@ -9,7 +9,7 @@ const api = axios.create({
 
 export const fetchPosts = async (page: number = 1): Promise<CleanPost[]> => {
 
-  const perPage = page === 1 ? 10 : 20;
+  const perPage = page === 1 ? 20 : 30;
   try {
     const response = await api.get<WPPostRaw[]>(`/${Config.DATA_TYPE_EP}`, {
       params: {
